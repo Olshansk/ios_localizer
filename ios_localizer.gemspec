@@ -18,10 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "net/https"
   gem.add_dependency "json"
-  gem.add_dependency "cgi"
   gem.add_dependency "htmlentities"
-  gem.add_dependency "optparse"
   
 end
