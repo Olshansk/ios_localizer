@@ -101,5 +101,5 @@ limitations under the License.
   [@amandeep]: http://twitter.com/amandeep
   [this]: https://code.google.com/apis/console/
   [Google's Translate REST API]: https://developers.google.com/translate/v2/using_rest
-  [This image]: https://github.com/Olshansk/ios_localizer/blob/master/images/Add%20Language.png
-  [here]: https://github.com/Olshansk/ios_localizer/blob/master/images/Localize.png
+  [This image]: https://github.com/Olshansk/ios_localizer/raw/master/images/Add%20Language.png
+  [here]: https://github.com/Olshansk/ios_localizer/raw/master/images/Localize.png
