@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require "ios_localizer"
+require 'optparse'
+
+# Initialise default constants
+
+key = nil
+proj_dir = Dir.pwd
+source = "en"
+skip = []
+
+# Get command line variables 
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: your_app [options]"
+  opts.on('-k [ARG]', '--key [ARG]', "Mandatory Google Translate key") do |v|
+  	key = v
+  end
+  opts.on('-s [ARG]', '--source [ARG]', "Specify the source language") do |v|
+  	source = v
+  end
+  opts.on('-n [ARG]', '--nolang [ARG]', "Specify the languages gem should avoid converting") do |v|
+  	skip << v
+  end
+end.parse!
+
+# Raise appropriate exceptions
+
+raise OptionParser::MissingArgument if key.nil?
+
+# Pass parameter to script
+
+IosLocalizer.localize(key, proj_dir, source, skip)
