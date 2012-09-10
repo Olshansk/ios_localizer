@@ -5,6 +5,7 @@ require 'ios_localizer/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "ios_localizer"
+  gem.date          = Date.today
   gem.version       = IosLocalizer::VERSION
   gem.authors       = ["Daniel Olshansky", "Amandeep Grewal"]
   gem.email         = ["olshansky.daniel@gmail.com", "me@amandeep.ca"]
@@ -17,11 +18,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_development_dependency "uri"
-  gem.add_development_dependency "net/https"
-  gem.add_development_dependency "json"
-  gem.add_development_dependency "cgi"
-  gem.add_development_dependency "htmlentities"
-  gem.add_development_dependency "optparse"
+  gem.add_dependency "net/https"
+  gem.add_dependency "json"
+  gem.add_dependency "cgi"
+  gem.add_dependency "htmlentities"
+  gem.add_dependency "optparse"
   
 end
