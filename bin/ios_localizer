@@ -5,30 +5,65 @@ require 'optparse'
 
 # Initialise default constants
 
-key = nil
-proj_dir = Dir.pwd
-source = "en"
-skip = []
+options = {}
+
+#options[:key] = 0
+#options[:source] = "en"
+#options[:skip] = []
 
 # Get command line variables 
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: your_app [options]"
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: ios_localizer [options]"
+
+  opts.separator ""
+  opts.separator "Specific options:"
+  
   opts.on('-k [ARG]', '--key [ARG]', "Mandatory Google Translate key") do |v|
-  	key = v
+  	options[:key] = v
   end
   opts.on('-s [ARG]', '--source [ARG]', "Specify the source language") do |v|
-  	source = v
+  	options[:source] = v
   end
-  opts.on('-n [ARG]', '--nolang [ARG]', "Specify the languages gem should avoid converting") do |v|
-  	skip << v
+  opts.on('-n [ARG]', '--nolang [ARG]', "Specify languages added to project but should be avoided during translation") do |v|
+  	options[:skip] << v
+  end
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    opts.verbose = v
+  end
+
+  opts.separator ""
+  opts.separator "Common options:"
+
+
+  opts.on_tail("-h", "--help", "Show help message") do
+    puts opts
+      exit
+  end
+  opts.on_tail("--version", "Show gem version") do
+    puts IosLocalizer::VERSION
+    exit
   end
 end.parse!
 
 # Raise appropriate exceptions
 
-raise OptionParser::MissingArgument if key.nil?
+begin
+  optparse.parse!
+  mandatory = [:key]
+  missing = mandatory.select{ |param| options[param].nil? }
+  if not missing.empty?
+    puts "Missing options: #{missing.join(', ')}"
+    puts optparse
+    exit
+  end
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  puts $!.to_s
+  puts optparse
+  exit
+end                                                         
 
+puts "Performing task with options: #{options.inspect}"
 # Pass parameter to script
 
-IosLocalizer.localize(key, proj_dir, source, skip)
+IosLocalizer.localize(options [:key], Dir.pwd, options [:source], options [:skip])
