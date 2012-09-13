@@ -7,9 +7,7 @@ require 'optparse'
 
 options = {}
 
-#options[:key] = 0
-#options[:source] = "en"
-#options[:skip] = []
+options[:source] = "en"
 
 # Get command line variables 
 

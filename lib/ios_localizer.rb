@@ -41,7 +41,7 @@ module IosLocalizer
 	def IosLocalizer.localize(key, proj_dir, source, skip)
 
 		h = HelperMethods.new
-
+		
 		source_strings_file = proj_dir + "/" + source + ".lproj/Localizable.strings"
 
 		#Get languages
@@ -50,8 +50,19 @@ module IosLocalizer
 
 		ldata = h.getDataFromURL (lurl)
 
-		if ldata.has_key? 'Error'
-			raise "web service error"
+		if ldata.has_key? "error"
+			if ldata["error"]["errors"][0]["reason"] == "keyInvalid"
+				puts "ERROR: Invalid API Key"
+				exit
+			else
+				puts "ERROR: web service error"
+				exit
+			end
+		end
+
+		if ldata.count == 0
+			puts "Invalid API key"
+			exit (1)
 		end
 
 		languages = Array.new
