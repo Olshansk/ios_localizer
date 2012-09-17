@@ -8,11 +8,11 @@ require 'optparse'
 options = {}
 
 options[:source] = "en"
-
+options[:skip] = []
 # Get command line variables 
 
 optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: ios_localizer [options]"
+  opts.banner = "Usage: ios_localizer"
 
   opts.separator ""
   opts.separator "Specific options:"
@@ -26,7 +26,7 @@ optparse = OptionParser.new do |opts|
   opts.on('-n [ARG]', '--nolang [ARG]', "Specify languages added to project but should be avoided during translation") do |v|
   	options[:skip] << v
   end
-  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+  opts.on("-v", "--verbose", "Run verbosely") do |v|
     opts.verbose = v
   end
 
